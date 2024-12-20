@@ -1,16 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
 import { RouterModule } from '@angular/router';
-import { DASHBOARD_ROUTES } from './dashboard.routing';
-import { SidebarModule } from "primeng/sidebar"
-import { ButtonModule } from 'primeng/button';
-import { ToolbarModule } from 'primeng/toolbar'
-import { CardModule } from 'primeng/card';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ChartModule } from 'primeng/chart';
+import { SidebarModule } from 'primeng/sidebar';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+
+import { DASHBOARD_ROUTES } from './dashboard.routing';
+import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { CookieService } from 'ngx-cookie-service';
     ToolbarModule,
     CardModule,
     ToastModule,
+    ChartModule,
+    //Shared
+    SharedModule,
   ],
-  providers: [MessageService, CookieService]
+  providers: [MessageService, CookieService],
 })
 export class DashboardModule { }
