@@ -1,6 +1,7 @@
+import { ChartData, ChartOptions } from './../../../../../../node_modules/chart.js/dist/types/index.d';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ProductsDataTransferService } from 'src/app/shared/services/products/products-data-transfer.service';
@@ -13,7 +14,9 @@ import { ProductsDataTransferService } from 'src/app/shared/services/products/pr
 export class DashboardHomeComponent implements OnInit, OnDestroy{
    private destroy$ = new Subject<void>()
   public productsList: Array<GetAllProductsResponse> = [];
-  public observableTest$ = new Observable();
+
+  public productsChartDatas!: ChartData;
+  public productsChartOptions!: ChartOptions;
 
   constructor(private productService: ProductsService, private messageService : MessageService, private productsDtService : ProductsDataTransferService) {}
 
@@ -31,6 +34,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy{
         if(response.length > 0){
           this.productsList = response;
           this.productsDtService.setProductsDatas(this.productsList);
+          this.setProductChartConfig();
         }
       },
       error: (err) => {
@@ -43,6 +47,62 @@ export class DashboardHomeComponent implements OnInit, OnDestroy{
         });
       },
     });
+  }
+
+  setProductChartConfig(): void {
+    if(this.productsList.length > 0){
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor = documentStyle.getPropertyValue('--text-color');
+      const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+      const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+      this.productsChartDatas = {
+        labels: this.productsList.map((element) => element?.name),
+        datasets: [
+          {
+            label: 'Quantidade',
+            backgroundColor: documentStyle.getPropertyValue('--indigo-400'),
+            borderColor: documentStyle.getPropertyValue('--indigo-400'),
+            hoverBackgroundColor: documentStyle.getPropertyValue('--indigo-500'),
+            data:this.productsList.map((element) => element.amount),
+          },
+        ],
+      };
+
+      this.productsChartOptions = {
+        maintainAspectRatio: false,
+        aspectRatio: 0.8,
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor
+            }
+          }
+        },
+
+        scales: {
+          x: {
+            ticks: {
+              color: textColorSecondary,
+              font: {
+                weight: 500,
+              },
+            },
+            grid: {
+              color: surfaceBorder
+            }
+          },
+          y: {
+            ticks: {
+              color: textColorSecondary,
+            },
+            grid: {
+              color: surfaceBorder
+            }
+          }
+        },
+      };
+    }
   }
 
   ngOnDestroy(): void {
