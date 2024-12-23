@@ -128,6 +128,7 @@
               label="Adicionar"
               pTooltip="Adicionar produto"
               tooltipPosition="top"
+              (onClick)="handleProductEvent(addProductEvent)"
             ></p-button>
           </div>
         </th>
@@ -147,7 +148,7 @@
         </td>
         <td>{{ product?.category?.name }}</td>
         <td>
-          <div class="flex justify-content-center gap-3 align-content-center align-items-center"></div>
+          <div class="flex justify-content-center gap-3 align-content-center align-items-center">
           <button
           pButton
           pRipple
@@ -155,6 +156,7 @@
           class="p-button-rounded p-button-warning"
           pTooltip="Editar produto"
           tooltipPosition="top"
+          (click)="handleProductEvent(editProductEvent, product?.id)"
           ></button>
           <button
           pButton
@@ -164,6 +166,7 @@
           pTooltip="Remover produto"
           tooltipPosition="top"
         ></button>
+      </div>
         </td>
       </tr>
     </ng-template>
