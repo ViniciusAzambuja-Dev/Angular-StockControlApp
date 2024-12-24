@@ -20,11 +20,12 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 import { CATEGORIES_ROUTES } from './categories.routing';
 import { CategoriesHomeComponent } from './page/categories-home/categories-home.component';
+import { CategoriesTableComponent } from './components/categories-table/categories-table.component';
 
 
 
 @NgModule({
-  declarations: [CategoriesHomeComponent],
+  declarations: [CategoriesHomeComponent, CategoriesTableComponent],
   imports: [
     CommonModule,
     FormsModule,
