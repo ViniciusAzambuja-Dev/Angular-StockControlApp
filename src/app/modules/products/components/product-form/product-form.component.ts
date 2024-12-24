@@ -61,7 +61,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         amount: Number(this.addProductForm.value.amount)
       };
 
-      this.productService.creteProduct(requestCreateProduct)
+      this.productService.createProduct(requestCreateProduct)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) =>{

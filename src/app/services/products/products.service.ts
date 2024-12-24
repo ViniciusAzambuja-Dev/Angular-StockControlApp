@@ -44,7 +44,7 @@ export class ProductsService {
     );
   }
 
-  creteProduct(requestDatas: CreateProductRequest): Observable<CreateProductResponse>{
+  createProduct(requestDatas: CreateProductRequest): Observable<CreateProductResponse>{
     return this.http.post<CreateProductResponse>(
       `${this.API_URL}/product`,
       requestDatas,
