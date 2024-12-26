@@ -13,7 +13,6 @@ import { ToastModule } from 'primeng/toast';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
-import { CategoriesHomeComponent } from './modules/categories/page/categories-home/categories-home.component';
 
 @NgModule({
   declarations: [
