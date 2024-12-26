@@ -43,6 +43,7 @@
                   styleClass="p-button-info"
                   icon="pi pi-plus"
                   label="Adicionar"
+                  (onClick)="handleCategoryEvent(addCategoryAction)"
                 ></p-button>
               </div>
             </th>
@@ -65,7 +66,8 @@
                   pRipple
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-danger"
-              ></button>
+                  (click)="handleDeleteCategoryEvent(category?.id, category?.name)"
+                  ></button>
               </div>
             </td>
           </tr>
